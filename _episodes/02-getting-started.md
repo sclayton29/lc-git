@@ -1,234 +1,97 @@
 ---
-title: "Getting started with git"
+title: "Getting started with GitHub"
 teaching: 20
 exercises: 0
 questions:
 - "What are repositories and how are they created?"
-- "What do `add` and `commit` mean?"
-- "How do I check the status of my repository?"
+#- "What do `add` and `commit` mean?"
+#- "How do I check the status of my repository?"
 objectives:
 - "create a git repository"
-- "track changes to files using the git repository"
-- "query the current status of the git repository"
+#- "track changes to files using the git repository"
+#- "query the current status of the git repository"
 keypoints:
-- "Git repositories contain metadata about files under version control"
-- "This metadata enables us to track changes to files over time"
-- "Git uses a two-stage commit process. Changes to files must first be added to the staging area, then committed to the repository"
+#- "Git repositories contain metadata about files under version control"
+#- "This metadata enables us to track changes to files over time"
+#- "Git uses a two-stage commit process. Changes to files must first be added to the staging area, then committed to the repository"
 ---
 
-### Using Git
+<!-- ### Using Git
 
-One of the main barriers to getting started with git is the language. Although some of the language used in git is 
-fairly self-explanatory, other terms are not so clear. The best way to get to learn the language - which consists of a 
-number of verbs such as `add`, `commit` and `push` (preceded by the word 'git') - is by using it, which is what we will be doing during this 
-lesson. These commands will be explained as we proceed from setting up a new version-controlled project to publishing 
-our own website.
+One of the main barriers to getting started with git is the language. Although some of the language used in git is fairly self-explanatory, other terms are not so clear. The best way to get to learn the language - which consists of a number of verbs such as `add`, `commit` and `push` (preceded by the word 'git') - is by using it, which is what we will be doing during this lesson. These commands will be explained as we proceed from setting up a new version-controlled project to publishing our own website. -->
 
 
 ### Creating a repository
 
-A Git **repository** is a data structure used to track changes to a set of project files over time. Repositories are 
-stored within the same directory as these project files, in a hidden directory called `.git`. We can create a new git 
-repository either by using [GitHub's web interface](https://github.com/new), or via the command line. Let's use the command line to create a git 
-repository for the experiments that we're going to do today.
+A git **repository** is a data structure used to track changes to a set of project files over time.  Repositories are stored within the same directory as these project files, in a hidden directory called `.git`. We can create a new git
+repository either by using [GitHub's web interface](https://github.com/new), or via the command line. Let's go to GitHub to create a repostiory.
 
-First, we will create a new directory for our project and enter that directory.
-<!explain commands as we go along>
+First, go to [github.com](https://github.com/) and log in.
+
+Click the green **New** button on the left side of the page. This will open the "Create a New Repository" form.
+
+Enter a memorial repository name. I'm going to do a variation on the date.
+~~~
+sclayton29/LC_2019-11-01
+~~~
+
+You can add a description if you would like. Then select **Create Repository**.
+
+You should now see a page of instructions for how you could add this to your local files. Note that there are options for the command line and for GitHub Desktop.
+
+### Creating a File
+We can get started by clicking the **creating a new file link** under the Set up in Desktop button.
+
+Name your file README.md. It is good practice to have a file like this to explain what is in the repository.
+
+Add a brief description of the repository. Because this is markdown, we can add a header by using #.
 
 ~~~
-$ mkdir hello-world
-$ cd hello-world
+# Description
+This is a test repository for Library Carpentry on November 1, 2019 in Rochester, NY.
 ~~~
-{: .bash}
 
-We will now create an empty git repository to track changes to our project. To do this we will use the git **init** command, 
-which is simply short for *initialise*.
+*We are using markdown because it is a plain-text file that GitHub can render nicely. This is the foundation for the webpage we will build later. You can see how this markdown will render by using the Preview tab.*
 
-~~~
-$ git init
-~~~
-{: .bash}
-~~~
-Initialized empty Git repository in <your file path>/hello-world/.git/
-~~~
-{: .output}
+Now we are ready to save our changes.
 
+Scroll to the bottom of the page to where you see **Commit new file.** Commit is similar to the save functionality we are used to in most tools. The major difference is that the new version is also being recorded within version control system meaning we can return to this exact version even after lots of other changes have been made.
 
-The `hello-world` directory is now a git repository. 
-
-If we run the `ls` command now (`ls` lists the content of the `hello-world` 
-directory), the repository might seem empty; however, adding the `-a` flag 
-for all files via `ls -a` will show all hidden files, which in this case 
-includes the new hidden directory `.git`.
-
-Note that whenever we use git via the command line, we need to preface each command (or verb) with `git`, so that the computer knows 
-we are trying to get git to do something, rather than some other program.
-
-### Displaying the current project's status
-
-We can run the `git status` command to display the current state of a project. Let's do that now.
+Our commit message is critical because it is tells us what this version contains, which will help us if we are trying to come back to it later. So try to be as descriptive as possible. However you will want to keep the first message short. You can add more info in the extended description box if desired.
 
 ~~~
-$ git status
+Started file. Added min info.
 ~~~
-{: .bash}
-~~~
-On branch master
-No commits yet
-nothing to commit (create/copy files and use "git add" to track)
-~~~
-{: .output}
 
-The output tells us that we are on the master branch (more on this later) and that we have nothing to commit (no 
-unsaved changes).
+When you are satisfied with your message. Select the green **Commit new file** button.
+
+This will return you to the main page of your repository.
+
+Click on README.md to open the file again.
+
+*Note: your readme is a special file that will also appear on the main page of your repository.*
+
+Notice the actions across the top.
+* **Raw** will show you the un-rendered file.
+* **Blame** will show you who made changes and when.
+* **History** will show you all the commit messages.
+
+You can also open in GitHub Desktop, Edit, and Delete.
+
+>### Challenge  
+Edit the README.md file again. Write a strong commit message. Look at the blame and history again.  
 
 
-### Adding and committing
+Let's add another file. This time we will also create a new folder.
 
-We will now create and save our first project file. This is a two-stage process. First, we **add** any files for which 
-we want to save the changes to a staging area, then we **commit** those changes to the repository. This two-stage 
-process gives us fine-grained control over what should and should not be included in a particular commit.
+On the main page of your repository, select **Create a new file**.
 
-Let's create a new file using the `touch` command, which is a quick way to create an empty file.
-
-~~~
-$ touch index.md
-~~~
-{: .bash}
-
-The `.md` extension above signifies that we have chosen to use the Markdown format, a lightweight markup language with plain text formatting syntax. We will explore Markdown a bit later.
-
-Let's check the status of our project again.
+This time in the name of the file. First write the new folder name followed by a slash and then the file name.
 
 ~~~
-$ git status
+LC_2019-11-01/Folder1/NewFile.md
 ~~~
-{: .bash}
-~~~
-On branch master
-No commits yet
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
 
-    index.md
+Add some text in your new file and commit it.
 
-nothing added to commit but untracked files present (use "git add" to track)
-~~~
-{: .output}
-
-This status is telling us that git has noticed a new file in our directory that we are not yet tracking. With colourised 
-output, the filename will appear in red. To change this, and to tell Git we want to track any changes we make to 
-index.md, we use `git add`.
-
-~~~
-$ git add index.md
-~~~
-{: .bash}
-
-This adds our Markdown file to the **staging area** (the area where git checks for file changes). To confirm this we want to use `git status` again.
-
-~~~
-$ git status
-~~~
-{: .bash}
-~~~
-On branch master
-
-No commits yet
-
-Changes to be committed:
-  (use "git rm --cached <file>..." to unstage)
-
-    new file:   index.md
-~~~
-{: .output}
-
-If we are using colourised output, we will see that the filename has changed colour (from red to green). Git also tells us that there
-is a new file to be committed but, before we do that, let's add some text to the file.
-
-We will open the file `index.md` with any text editor we have at hand (e.g. Notepad on Windows or TextEdit on Mac OSX) and enter `# Hello, world!`. The
-hash character is one way of writing a header with Markdown. Now, let's save the file within the text editor and check if Git
-has spotted the changes.
-
-~~~
-$ git status
-~~~
-{: .bash}
-~~~
-On branch master
-
-No commits yet
-
-Changes to be committed:
-  (use "git rm --cached <file>..." to unstage)
-
-	new file:   index.md
-
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
-
-	modified:   index.md
-~~~
-{: .output}
-
-This lets us know that git has indeed spotted the changes to our file, but that it hasn't yet staged them, so let's add 
-the new version of the file to the staging area.
-
-~~~
-$ git add index.md
-~~~
-{: .bash}
-
-Now we are ready to  **commit** our first changes. 
-Commit is similar to 'saving' a file to Git. 
-However, compared to saving, a commit provides a lot more information about the changes we have made,
-and this information will remain visible to us later.
-
-
-~~~
-$ git commit -m 'Add index.md'
-~~~
-{: .bash}
-~~~
-[master (root-commit) e9e8fd3] Add index.md
- 1 file changed, 1 insertion(+)
- create mode 100644 index.md
-~~~
-{: .output}
-
-We can see that one file has changed and that we made one insertion, which was a line with the text '#Hello, world!'. 
-We can
-also see the commit message 'Add index.md', which we added by using the `-m` flag after `git commit`.
-The commit message is used to record a short, descriptive, and specific summary of what we did to help us remember later on without having to look at the actual changes.
-If we just run `git commit` without the `-m` option, Git will launch nano (or whatever other editor we configured as `core.editor`)
-so that we can write a longer message.
-
-Having made a commit, we now have a permanent record of what was changed,
-along with metadata about who made the commit and at what time.
-
-> ## More on the Staging Area
->
-> If you think of Git as taking snapshots of changes over the life of a project,
-> `git add` specifies *what* will go in a snapshot
-> (putting things in the staging area),
-> and `git commit` then *actually takes* the snapshot, and
-> makes a permanent record of it (as a commit).
-> If you don't have anything staged when you type `git commit`,
-> Git will prompt you to use `git commit -a` or `git commit --all`,
-> which is kind of like gathering *everyone* for the picture!
-> However, it's almost always better to
-> explicitly add things to the staging area, because you might
-> commit changes you forgot you made. (Going back to snapshots,
-> you might get the extra with incomplete makeup walking on
-> the stage for the snapshot because you used `-a`!)
-> Try to stage things manually,
-> or you might find yourself searching for "git undo commit" more
-> than you would like!
-{: .callout}
-
-![The Git Staging Area](../fig/git-staging-area.svg)
-
-At the moment, our changes are only recorded locally, on our computer. If we wanted to 
-work collaboratively with someone else they would have no way of seeing what we've done.
-We will fix that in the next episode by using GitHub to share our work.
+Click the code button to return to the main page. Notice how your new folder and file can be accessed via this page.
